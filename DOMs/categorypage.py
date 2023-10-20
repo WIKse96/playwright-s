@@ -16,7 +16,9 @@ class CategoryPage:
        if classCount > 1:
            #dodać info do raportu, że display jest grid
            print('ok')
-
+       else:
+           print("nie ok")
+           print(classCount)
            # dodać info do raportu, że display jest NIE JEST gr
 
     def open_first_prod(self) -> None:

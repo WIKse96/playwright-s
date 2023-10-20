@@ -1,0 +1,2 @@
+def checkoutPage():
+    return None

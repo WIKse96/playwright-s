@@ -3,7 +3,7 @@ from playwright.sync_api import Playwright
 from website_is_up import test_website_is_up
 
 #konfiguracja playwright żeby można było go używać przy klasach
-@pytest.fixture
+@pytest.fixture(scope="module")
 def set_up(playwright: Playwright):
     main_page = "https://www.seart.pl/"
 
