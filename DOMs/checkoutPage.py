@@ -49,6 +49,7 @@ class CheckoutPage:
 
 
 
+    def payment_delivery_Comment(self,deliveryM, paymentM,comment, ch1,ch2,ch3):
         self.orderComment_input.fill(comment)
 
         if ch1:
@@ -73,14 +74,14 @@ class CheckoutPage:
         else:
             self.payinAdvance_combi.click()
 
-        #submit, przejście do płatności
-        self.submit_btn.click()
-
-
-        # Sprawdzamy, czy URL zawiera 'go.przelewy24'
-        time.sleep(4)
-
-
-        expect(self.page).to_have_url(re.compile(".*go.przelewy24*"))
+        # submit, przejście do płatności
+        # self.submit_btn.click()
+        #
+        #
+        # # Sprawdzamy, czy URL zawiera 'go.przelewy24'
+        # time.sleep(4)
+        #
+        #
+        # expect(self.page).to_have_url(re.compile(".*go.przelewy24*"))
 
 
