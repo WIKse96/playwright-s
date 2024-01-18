@@ -1,9 +1,9 @@
 import os
-
+from utils.secret_config import PASSWORD, EMAIL
 import pytest
 from playwright.sync_api import Playwright
-from website_is_up import test_website_is_up
-
+from website_is_up import website_is_up
+from DOMs.myAccountPage import MyAccount
 
 try:
     PASSWORD = os.environ['PASSWORD']
@@ -20,7 +20,7 @@ def set_up(playwright: Playwright):
     contex = browser.new_context()
     page = contex.new_page()
     # test czy strona odpowiada
-    test_website_is_up(main_page)
+    website_is_up(main_page)
 
     #otwarcie strony głównej
     page.goto(main_page)
@@ -28,11 +28,26 @@ def set_up(playwright: Playwright):
     yield page
     page.close()
 
-@pytest.fixture(scope='session')
+#drugie utworzenie obiektu dla zalogowanego usera.
+@pytest.fixture(scope='function')
 def login_Set_up(playwright):
     browser = playwright.chromium.launch(headless=False, slow_mo=300)
     context = browser.new_context()
     page_login = context.new_page()
-    # login_issue = True
-    # while login_issue:
+    # Logowanie użytkownika
+    myacc = MyAccount(page_login)
+    url = 'https://www.seart.pl/customer/account/'
+    myacc.loginpage_run(url)
+    myacc.login(EMAIL, PASSWORD)
+
+    # Upewnienie się, że użytkownik jest zalogowany
+    myacc.assertLogged()
+
     yield page_login
+
+    # Tutaj możesz ewentualnie dodać kod do wylogowania użytkownika po zakończeniu testu
+    myacc.logOut()
+    page_login.close()
+
+
+

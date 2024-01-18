@@ -15,7 +15,9 @@ def test_buy(set_up, name, email, zipcode, deliveryM, paymentM, comment, ch1,ch2
     checkoutPageObj = CheckoutPage(page)
 
     productCardObj.run_productsimple()
-    productCardObj.addtocartSimple()
+    productCardObj.productAssertions()
+    productCardObj.addtocart_simple()
 
     checkoutPageObj.fillOutForm(name, email, zipcode, deliveryM, paymentM, comment, ch1, ch2, ch3)
     time.sleep(3)
+

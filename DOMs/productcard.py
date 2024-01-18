@@ -1,3 +1,8 @@
+import time
+
+from playwright.sync_api import expect
+
+
 class ProductCard:
     def __init__(self, page):
         self.page = page
@@ -15,21 +20,60 @@ class ProductCard:
         self.ask_message = page.get_by_label("Treść pytania*")
         self.ask_submit = page.get_by_role("button", name="Wyślij pytanie")
         self.search = page.locator("#search").nth(1)
-        self.logo = page.get_by_role("link", name="Drewniane meble sosnowe, bukowe i dębowe - Seart.pl - producent mebli drewnianych")
-        self.opinions = page.frame_locator("iframe[title=\"Produktowy 06\\.2023\"]").get_by_text("Zobacz, co Klienci mówią o naszych produktach:")
+        self.logo = page.get_by_role("link",
+                                     name="Drewniane meble sosnowe, bukowe i dębowe - Seart.pl - producent mebli drewnianych")
+        self.opinions = page.frame_locator("iframe[title=\"Produktowy 06\\.2023\"]").get_by_text(
+            "Zobacz, co Klienci mówią o naszych produktach:")
         self.addtocart_btn = page.get_by_role("button", name="Do koszyka")
-        self.cartOnProductCart = page.locator("xpath=//a[@href='https://www.seart.pl/checkout/cart/']//strong[contains(text(),'Koszyk')]")
+        self.cartOnProductCart = page.locator(
+            "xpath=//a[@href='https://www.seart.pl/checkout/cart/']//strong[contains(text(),'Koszyk')]")
         self.gotocheckou_btn = page.get_by_role("button", name="Zamówienie")
+        self.qty_input = page.locator("xpath=//input[@class='input-text qty']").first
+        self.qtyUp_btn = page.locator("xpath=//a[@class='button-up']").first
 
+        self.qtyUp_G_btn = page.locator("//a[@id='button_up_group_3206']")
+        self.qty_G_input = page.locator("//input[@id='super_group_3206']")
+
+    # otwarcie produktu prostego
     def run_productsimple(self):
         self.page.goto(self.urlSimple)
-    def productSimpleAssertions(self):
-        assert self.h1
-        assert self.opineo
-        assert self.technicalS
-        assert self.faq
-        assert self.askCA
-    def addtocartSimple(self):
+
+    # otwarcie produktu grupowanego
+    def run_productGrouped(self):
+        expect(self.qty_G_input.input_value()).to_equal('0')
+        self.page.goto(self.urlGrouped)
+        expect(self.qty_G_input.input_value()).to_equal('1')
+
+
+    def productAssertions(self):
+
+            expect(self.technicalS).to_be_visible()
+            expect(self.askCA).to_be_visible()
+            expect(self.faq).to_be_visible()
+            expect(self.h1).to_be_visible()
+            expect(self.descr).to_be_visible()
+            #klik w zapytaj o produkt
+            self.askCA.click()
+            expect(self.ask_name).to_be_visible()
+            expect(self.ask_email).to_be_visible()
+
+    def addtocart_Grouped(self):
+        expect()
+        self.qtyUp_G_btn.click()
+
+
+
+    def addtocart_simple(self):
         self.addtocart_btn.click()
         self.cartOnProductCart.hover()
         self.gotocheckou_btn.click()
+
+    def addtocartGrouped(self):
+        expect(self.qty_input).to_have_value('0')
+        self.qtyUp_btn.click()
+        expect(self.qty_input).to_have_value('1')
+        self.addtocart_btn.click()
+        self.cartOnProductCart.hover()
+        self.gotocheckou_btn.click()
+
+

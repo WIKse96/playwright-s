@@ -20,7 +20,7 @@ class CheckoutPage:
         self.floor_input = self.page.get_by_role("textbox", name="Piętro")
         self.zipcode_input = self.page.get_by_label("*Kod pocztowy")
         self.city_input = self.page.get_by_label("* Miasto")
-        self.deliveryMethod_kurier_combi = self.page.get_by_label("Kurier 38,90 zł")
+        self.deliveryMethod_kurier_combi = self.page.locator("//label[@for='s_method_tablerate_bestway']")
         self.deliveryMethod_osobisty_combi = self.page.get_by_label("Odbiór osobisty 0,00 zł")
         self.paymentMethod_P24_combi = self.page.locator("xpath=//input[@id='p_method_dialcom_przelewy']")
         self.orderComment_input = self.page.locator("#order-comment")
@@ -30,9 +30,10 @@ class CheckoutPage:
         self.agree_checkbox = self.page.get_by_label("Zgadzam się na powyższe warunki")
         self.agree2_checkbox = self.page.get_by_label("Zgadzam się", exact=True)
         self.newsletter_checkbox = self.page.get_by_label("Zapisz do newslettera")
-        self.submit_btn = self.page.get_by_role("button", name="Potwierdzam zamówienie Zamówienie wiąze się z obowiązkiem zapłaty")
+        self.submit_btn = self.page.get_by_role("button",
+                                                name="Potwierdzam zamówienie Zamówienie wiąze się z obowiązkiem zapłaty")
 
-    def fillOutForm(self, name, email, zipcode, deliveryM, paymentM,comment, ch1,ch2,ch3):
+    def fillOutForm(self, name, email, zipcode, deliveryM, paymentM, comment, ch1, ch2, ch3):
         expect(self.page).to_have_url(re.compile(".*onepagecheckout"))
         self.noncompany_combi.click()
         self.name_input.fill(name)
@@ -45,11 +46,7 @@ class CheckoutPage:
         self.zipcode_input.fill(zipcode)
         self.city_input.fill('Busko Z')
 
-
-
-
-
-    def payment_delivery_Comment(self,deliveryM, paymentM,comment, ch1,ch2,ch3):
+    def payment_delivery_Comment(self, deliveryM, paymentM, comment, ch1, ch2, ch3):
         self.orderComment_input.fill(comment)
 
         if ch1:
@@ -83,5 +80,3 @@ class CheckoutPage:
         #
         #
         # expect(self.page).to_have_url(re.compile(".*go.przelewy24*"))
-
-

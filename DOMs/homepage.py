@@ -6,7 +6,7 @@ class HomePage:
             'drewnianych"]')
         self.cookie_instrukcja = page.locator('link[role="link"][name="Tu znajdziesz instrukcję"]')
         self.cookie_politykaprywatnosci = page.locator('link[role="link"][name="Więcej w Polityce prywatności"]')
-        self.cookie_allowbtn = page.get_by_text("Zgadzam się")
+        self.cookie_allowbtn = page.locator("//a[@onclick='allowSaveCookie()']")
 
     def homepage_assertions(self):
         assert self.logo
