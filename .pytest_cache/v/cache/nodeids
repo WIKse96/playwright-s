@@ -10,5 +10,6 @@
   "test_runs/test_login.py::test_login[test@seart.pl-test321]",
   "test_runs/test_myAccount.py::test_CheckOrders",
   "test_runs/test_myAccount.py::test_login[test@seart.pl-test123]",
-  "test_runs/test_myAccount.py::test_login[test@seart.pl-test321]"
+  "test_runs/test_myAccount.py::test_login[test@seart.pl-test321]",
+  "test_runs/test_productCart_grouped.py::test_addToCart_G"
 ]

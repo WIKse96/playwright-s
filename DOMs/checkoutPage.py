@@ -33,7 +33,7 @@ class CheckoutPage:
         self.submit_btn = self.page.get_by_role("button",
                                                 name="Potwierdzam zamówienie Zamówienie wiąze się z obowiązkiem zapłaty")
 
-    def fillOutForm(self, name, email, zipcode, deliveryM, paymentM, comment, ch1, ch2, ch3):
+    def fillOutForm(self, name, email, zipcode, deliveryM, paymentM, comment, ch1, ch2, ch3)->None:
         expect(self.page).to_have_url(re.compile(".*onepagecheckout"))
         self.noncompany_combi.click()
         self.name_input.fill(name)
@@ -46,7 +46,7 @@ class CheckoutPage:
         self.zipcode_input.fill(zipcode)
         self.city_input.fill('Busko Z')
 
-    def payment_delivery_Comment(self, deliveryM, paymentM, comment, ch1, ch2, ch3):
+    def payment_delivery_Comment(self, deliveryM, paymentM, comment, ch1, ch2, ch3)->None:
         self.orderComment_input.fill(comment)
 
         if ch1:

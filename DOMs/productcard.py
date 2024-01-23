@@ -35,45 +35,42 @@ class ProductCard:
         self.qty_G_input = page.locator("//input[@id='super_group_3206']")
 
     # otwarcie produktu prostego
-    def run_productsimple(self):
+    def run_productsimple(self) -> None:
         self.page.goto(self.urlSimple)
 
     # otwarcie produktu grupowanego
-    def run_productGrouped(self):
+    def run_productGrouped(self) -> None:
+        self.page.goto(self.urlGrouped)
+
+    def asserions_productGrouped(self) -> None:
         expect(self.qty_G_input.input_value()).to_equal('0')
         self.page.goto(self.urlGrouped)
         expect(self.qty_G_input.input_value()).to_equal('1')
 
+    def productAssertions(self) -> None:
+        expect(self.technicalS).to_be_visible()
+        expect(self.askCA).to_be_visible()
+        expect(self.faq).to_be_visible()
+        expect(self.h1).to_be_visible()
+        expect(self.descr).to_be_visible()
+        # klik w zapytaj o produkt
+        self.askCA.click()
+        expect(self.ask_name).to_be_visible()
+        expect(self.ask_email).to_be_visible()
 
-    def productAssertions(self):
-
-            expect(self.technicalS).to_be_visible()
-            expect(self.askCA).to_be_visible()
-            expect(self.faq).to_be_visible()
-            expect(self.h1).to_be_visible()
-            expect(self.descr).to_be_visible()
-            #klik w zapytaj o produkt
-            self.askCA.click()
-            expect(self.ask_name).to_be_visible()
-            expect(self.ask_email).to_be_visible()
-
-    def addtocart_Grouped(self):
+    def addtocart_Grouped(self) -> None:
         expect()
         self.qtyUp_G_btn.click()
 
-
-
-    def addtocart_simple(self):
+    def addtocart_simple(self) -> None:
         self.addtocart_btn.click()
         self.cartOnProductCart.hover()
         self.gotocheckou_btn.click()
 
-    def addtocartGrouped(self):
+    def addtocartGrouped(self) -> None:
         expect(self.qty_input).to_have_value('0')
         self.qtyUp_btn.click()
         expect(self.qty_input).to_have_value('1')
         self.addtocart_btn.click()
         self.cartOnProductCart.hover()
         self.gotocheckou_btn.click()
-
-

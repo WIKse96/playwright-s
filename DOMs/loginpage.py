@@ -16,24 +16,23 @@ class LoginPage:
         self.outlogin_btn = page.get_by_title("Wyloguj")
         self.alertEmail_p = page.locator("xpath=//div[@id='advice-required-entry-email']")
         self.alertPassw_p = page.locator("xpath=//div[@id='advice-required-entry-pass']")
-    def logipage_run(self):
+
+    def logipage_run(self) -> None:
         self.page.goto(self.url)
 
-    def login(self,email,password):
+    def login(self, email, password) -> None:
         self.login_input.fill(email)
         self.pass_input.fill(password)
         self.submit_btn.click()
 
-
-    def restorepassword(self):
+    def restorepassword(self) -> None:
         self.forgottenPass_btn.click()
 
-    def assertLogged(self):
+    def assertLogged(self) -> None:
         expect(self.alertEmail_p).to_be_hidden()
         expect(self.alertPassw_p).to_be_hidden()
         expect(self.account_btn).to_be_visible()
         expect(self.outlogin_btn).to_be_visible()
 
-    def logOut(self):
+    def logOut(self) -> None:
         self.outlogin_btn.click()
-

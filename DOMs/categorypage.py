@@ -1,12 +1,14 @@
 import time
 from playwright.sync_api import expect
 
+
 class CategoryPage:
     def __init__(self, page):
         self.page = page
         self.prods = page.locator("xpath=//div[@class ='item-area']")
         self.display_as_grid = page.locator("products-grid")
-        self.cats_on_left_bar = page.locator("//li[contains(@class,'cat-item')]//a[contains(text(),'Biurka drewniane')]")
+        self.cats_on_left_bar = page.locator(
+            "//li[contains(@class,'cat-item')]//a[contains(text(),'Biurka drewniane')]")
         self.list = page.locator("//ul[@id='products-list']//li[@class='item even']").all()
         self.wooden_beds_img = page.locator("//img[@alt='Łóżka drewniane']")
         self.h1 = page.get_by_role("heading", name="Meble z litego drewna")
@@ -30,12 +32,12 @@ class CategoryPage:
         self.prods.first.click()
         time.sleep(3)
 
-#sprawdz czy widoczny jest przycisk powrotu do góry
-    def assert_top_btn(self):
+    # sprawdz czy widoczny jest przycisk powrotu do góry
+    def assert_top_btn(self) -> None:
         self.page.mouse.wheel(0, 80)
         expect(self.top_btn).to_be_visible()
 
-    def assert_category(self)-> None:
+    def assert_category(self) -> None:
         expect(self.cats_on_left_bar).to_be_visible()
         expect(self.wooden_beds_img).to_be_visible()
         expect(self.h1).to_be_visible()
@@ -43,7 +45,3 @@ class CategoryPage:
         category_page_instance.assert_top_btn()
         expect(self.list_filter).to_be_visible()
         expect(self.free_Delivery_btn)
-
-
-
-

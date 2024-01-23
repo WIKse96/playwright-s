@@ -12,6 +12,6 @@ class Beds_cat:
         self.firstProduct_link = page.locator("xpath=//ul[contains(@class, 'products-grid')]/li[contains(@class, "
                                               "'item')][1]/div/div/h2/a").text()
 
-    def run_beds(self):
+    def run_beds(self)->None:
         self.page.goto(self.url)
 

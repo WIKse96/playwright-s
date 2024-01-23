@@ -8,7 +8,7 @@ from DOMs.checkoutPage import CheckoutPage
 
 @pytest.mark.parametrize('name, email, zipcode, deliveryM, paymentM, comment, ch1,ch2,ch3',[
     ('Wiktor', 'wiktotest@seart.pl', '55-888', 'k', 'p24', 'komentarzĆŹŻŻĆŹółćżśą!@#', True,True,True)])
-def test_buy(set_up, name, email, zipcode, deliveryM, paymentM, comment, ch1,ch2,ch3):
+def test_buy(set_up, name, email, zipcode, deliveryM, paymentM, comment, ch1,ch2,ch3)->None:
     page = set_up
 
     productCardObj = ProductCard(page)

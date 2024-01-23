@@ -6,10 +6,8 @@ from DOMs.loginpage import LoginPage
 from utils.secret_config import PASSWORD, EMAIL
 
 
-
-
 # funkcja dokonania zakupu pologowaniu
-def test_category_logged(login_Set_up):
+def test_category_logged(login_Set_up) -> None:
     page = login_Set_up
     # dodanie do koszyka produkt grupowany
     productGObj = ProductCard(page)
@@ -19,5 +17,5 @@ def test_category_logged(login_Set_up):
     productGObj.productAssertions()
     productGObj.addtocartGrouped()
     # przejście do checkout
-    #odkomenować gdy chcemy złożyć zamówienie
+    # odkomenować gdy chcemy złożyć zamówienie
     # checkoutObj.payment_delivery_Comment(deliveryM="k", paymentM="p24", comment="test", ch1=True, ch2=True, ch3=True)

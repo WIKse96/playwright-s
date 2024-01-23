@@ -8,13 +8,13 @@ class HomePage:
         self.cookie_politykaprywatnosci = page.locator('link[role="link"][name="Więcej w Polityce prywatności"]')
         self.cookie_allowbtn = page.locator("//a[@onclick='allowSaveCookie()']")
 
-    def homepage_assertions(self):
+    def homepage_assertions(self)->None:
         assert self.logo
         assert self.cookie_instrukcja
         assert self.cookie_politykaprywatnosci
         assert self.cookie_allowbtn
 
-    def cookietest(self):
+    def cookietest(self)->None:
         self.cookie_allowbtn.click()
         # Znajdź element div
         self.div_element = self.page.locator('div.notice-text')

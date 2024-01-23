@@ -15,24 +15,24 @@ class MyAccount:
             "xpath=//a[@href='https://www.seart.pl/sales/order/history/'][normalize-space()='Zobacz wszystkie']")
         self.orderNr = page_login.locator("xpath=//td[normalize-space()='100018125']")
 
-    def loginpage_run(self, url):
+    def loginpage_run(self, url)->None:
         self.page_login.goto(url)
 
-    def login(self, email, password):
+    def login(self, email, password)->None:
         self.login_input.fill(email)
         self.pass_input.fill(password)
         self.submit_btn.click()
 
-    def assertLogged(self):
+    def assertLogged(self)->None:
         expect(self.alertEmail_p).to_be_hidden()
         expect(self.alertPassw_p).to_be_hidden()
         expect(self.outlogin_btn).to_be_visible()
 
-    def checkOrders(self):
+    def checkOrders(self)->None:
         self.myAccount_link.click()
         self.seeAllOrders_link.click()
         expect(self.orderNr).to_be_visible()
 
-    def logOut(self):
+    def logOut(self)->None:
         self.outlogin_btn.click()
 

@@ -1,7 +1,7 @@
 from DOMs.categorypage import CategoryPage
 
 
-def test_catpage(set_up):
+def test_catpage(set_up)->None:
     page = set_up
     url = 'https://www.seart.pl/meble.html'
     categoryObj = CategoryPage(page)
