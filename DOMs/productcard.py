@@ -35,6 +35,8 @@ class ProductCard:
         self.qtyUp_G_btn = page.locator("//a[@id='button_up_group_3203']")
         self.qty_G_input = page.locator("//input[@id='super_group_3203']")
 
+        self.items_in_cart = page.locator("//span[@class='items']")
+
     # otwarcie produktu prostego
     def run_productsimple(self) -> None:
         self.page.goto(self.urlSimple)
@@ -68,11 +70,13 @@ class ProductCard:
     # dodani do koszyka
     def addtocartGrouped(self) -> None:
         expect(self.qty_G_input).to_have_value(re.compile(r"[0]"))
-        self.page.pause()
+
         self.qtyUp_G_btn.click()
         expect(self.qty_G_input).to_have_value(re.compile(r"[1]"))
         self.qtyUp_G_btn.click()
         expect(self.qty_G_input).to_have_value(re.compile(r"[2]"))
         self.addtocart_btn.click()
+        #asercja czy w koszyku znajdują sie produkty
+        assert self.items_in_cart.text_content() == '2 produktów(y)'
         self.cartOnProductCart.hover()
         self.gotocheckou_btn.click()
