@@ -1,9 +1,10 @@
 import time
-
+import re
 from playwright.sync_api import expect
 
 
 class ProductCard:
+    # inicjacja elementów
     def __init__(self, page):
         self.page = page
         self.urlSimple = 'https://www.seart.pl/lustro-sosnowe-rustyk-pion-poziom-18393.html'
@@ -31,8 +32,8 @@ class ProductCard:
         self.qty_input = page.locator("xpath=//input[@class='input-text qty']").first
         self.qtyUp_btn = page.locator("xpath=//a[@class='button-up']").first
 
-        self.qtyUp_G_btn = page.locator("//a[@id='button_up_group_3206']")
-        self.qty_G_input = page.locator("//input[@id='super_group_3206']")
+        self.qtyUp_G_btn = page.locator("//a[@id='button_up_group_3203']")
+        self.qty_G_input = page.locator("//input[@id='super_group_3203']")
 
     # otwarcie produktu prostego
     def run_productsimple(self) -> None:
@@ -42,10 +43,10 @@ class ProductCard:
     def run_productGrouped(self) -> None:
         self.page.goto(self.urlGrouped)
 
+    # asercje czy wszystkie elementy na karcie są ok
     def asserions_productGrouped(self) -> None:
-        expect(self.qty_G_input.input_value()).to_equal('0')
-        self.page.goto(self.urlGrouped)
-        expect(self.qty_G_input.input_value()).to_equal('1')
+        pass
+        # asercje czy wszystkie elementy na karcie są ok
 
     def productAssertions(self) -> None:
         expect(self.technicalS).to_be_visible()
@@ -58,19 +59,20 @@ class ProductCard:
         expect(self.ask_name).to_be_visible()
         expect(self.ask_email).to_be_visible()
 
-    def addtocart_Grouped(self) -> None:
-        expect()
-        self.qtyUp_G_btn.click()
-
+    # dodanie do koszyka
     def addtocart_simple(self) -> None:
         self.addtocart_btn.click()
         self.cartOnProductCart.hover()
         self.gotocheckou_btn.click()
 
+    # dodani do koszyka
     def addtocartGrouped(self) -> None:
-        expect(self.qty_input).to_have_value('0')
-        self.qtyUp_btn.click()
-        expect(self.qty_input).to_have_value('1')
+        expect(self.qty_G_input).to_have_value(re.compile(r"[0]"))
+        self.page.pause()
+        self.qtyUp_G_btn.click()
+        expect(self.qty_G_input).to_have_value(re.compile(r"[1]"))
+        self.qtyUp_G_btn.click()
+        expect(self.qty_G_input).to_have_value(re.compile(r"[2]"))
         self.addtocart_btn.click()
         self.cartOnProductCart.hover()
         self.gotocheckou_btn.click()

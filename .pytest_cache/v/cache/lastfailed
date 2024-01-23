@@ -1,6 +1,5 @@
 {
   "test_runs/test_myAccount.py::test_login[test@seart.pl-test123]": true,
   "test_runs/test_myAccount.py::test_login[test@seart.pl-test321]": true,
-  "test_runs/test_buyLogged.py::test_login": true,
-  "test_runs/test_productCart_grouped.py::test_addToCart_G": true
+  "test_runs/test_buyLogged.py::test_login": true
 }
