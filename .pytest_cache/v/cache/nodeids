@@ -2,6 +2,7 @@
   "test_runs/test_addtocart.py::test_buy[Wiktor-wiktotest@seart.pl-55-888-k-p24-komentarz\\u0106\\u0179\\u017b\\u017b\\u0106\\u0179\\xf3\\u0142\\u0107\\u017c\\u015b\\u0105!@#-True-True-True]",
   "test_runs/test_buyLogged.py::test_category_logged",
   "test_runs/test_buyLogged.py::test_login",
+  "test_runs/test_categorypage.py::test_beds_cat",
   "test_runs/test_categorypage.py::test_catpage",
   "test_runs/test_homepage.py::test_homep",
   "test_runs/test_login.py::test_login[SELECT * FROM users-fakepassss]",
