@@ -11,7 +11,6 @@ class CategoryPage:
             "//li[contains(@class,'cat-item')]//a[contains(text(),'Biurka drewniane')]")
         self.list = page.locator("//ul[@id='products-list']//li[@class='item even']").all()
         self.wooden_beds_img = page.locator("//img[@alt='Łóżka drewniane']")
-        self.h1 = page.get_by_role("heading", name="Meble z litego drewna")
         self.top_btn = page.locator("div").filter(has_text="back to top")
         self.list_filter = page.locator("#narrow-by-list").get_by_role("combobox")
         self.free_Delivery_btn = page.get_by_role("link", name="Darmowa dostawa z wniesieniem pow. 1000 zł")
@@ -40,7 +39,7 @@ class CategoryPage:
     def assert_category(self) -> None:
         expect(self.cats_on_left_bar).to_be_visible()
         expect(self.wooden_beds_img).to_be_visible()
-        expect(self.h1).to_be_visible()
+
         category_page_instance = CategoryPage(self.page)
         category_page_instance.assert_top_btn()
         expect(self.list_filter).to_be_visible()

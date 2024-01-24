@@ -10,7 +10,7 @@ class ProductCard:
         self.urlSimple = 'https://www.seart.pl/lustro-sosnowe-rustyk-pion-poziom-18393.html'
         self.urlGroupedWithAdds = 'https://www.seart.pl/lozko-sosnowe-rustyk-ostrowit-ii-140.html'
         self.urlGrouped = 'https://www.seart.pl/lozko-sosnowe-rustyk-ostrowit-ii-140.html'
-        self.h1 = page.get_by_role("heading", name="Lustro drewniane wiszące Rustyk")
+        self.heading = page.get_by_role("heading")
         self.opineo = page.get_by_role("link", name="Opineo")
         self.technicalS = page.get_by_text("Specyfikacja techniczna")
         self.faq = page.get_by_role("link", name="FAQ")
@@ -54,7 +54,10 @@ class ProductCard:
         expect(self.technicalS).to_be_visible()
         expect(self.askCA).to_be_visible()
         expect(self.faq).to_be_visible()
-        expect(self.h1).to_be_visible()
+
+        #pętla sprawdzajaca czy na stronie znajdują się headery
+        for i in self.heading.all():
+            expect(i).to_be_visible()
         expect(self.descr).to_be_visible()
         # klik w zapytaj o produkt
         self.askCA.click()

@@ -12,6 +12,14 @@ class Beds_cat:
         self.firstProduct_link = page.locator("xpath=//ul[contains(@class, 'products-grid')]/li[contains(@class, "
                                               "'item')][1]/div/div/h2/a").text()
 
-    def run_beds(self)->None:
+    # odpal strone kategorię z łóżkami
+    def run_beds(self) -> None:
         self.page.goto(self.url)
+
+    # asercje czy odpowiednie elementy znajdują się na stronie
+    def beds_assertions(self) -> None:
+        expect(self.bukowe_link).to_be_visible()
+        expect(self.debowe_link).to_be_visible()
+        expect(self.sosnowe_link).to_be_visible()
+        print(self.firstProduct_link)
 

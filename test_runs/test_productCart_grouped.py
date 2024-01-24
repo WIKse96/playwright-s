@@ -6,5 +6,6 @@ def test_addToCart_G(set_up) -> None:
     productObj = ProductCard(page)
     productObj.run_productGrouped()
     productObj.asserions_productGrouped()
-
+    productObj.productAssertions()
+    page.pause()
     productObj.addtocartGrouped()
