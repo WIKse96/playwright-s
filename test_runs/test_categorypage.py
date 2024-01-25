@@ -17,3 +17,4 @@ def test_beds_cat(set_up) -> None:
     bedsObj = Beds_cat(page)
     bedsObj.run_beds()
     bedsObj.beds_assertions()
+    bedsObj.size_filter()
