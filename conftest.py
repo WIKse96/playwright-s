@@ -1,6 +1,9 @@
 import os
-from utils.secret_config import PASSWORD, EMAIL
+from pathlib import Path
+from slugify import slugify
 import pytest
+import pytest_html
+from utils.secret_config import PASSWORD, EMAIL
 from playwright.sync_api import Playwright
 from website_is_up import website_is_up
 from DOMs.myAccountPage import MyAccount
@@ -45,9 +48,33 @@ def login_Set_up(playwright):
 
     yield page_login
 
-    # Tutaj możesz ewentualnie dodać kod do wylogowania użytkownika po zakończeniu testu
+    # Tutaj dać kod do wylogowania użytkownika po zakończeniu testu
     myacc.logOut()
     page_login.close()
 
 
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    pytest_html = item.config.pluginmanager.getplugin("html")
+    outcome = yield
+    screen_file = ''
+    report = outcome.get_result()
+    extra = getattr(report, "extra", [])
 
+    fixtures = ["set_up", "login_Set_up"]
+
+    for fixture in fixtures:
+        if fixture in item.funcargs:
+            xfail = hasattr(report, "wasxfail")
+            if report.when == "call" and (report.failed or xfail and fixture == "set_up"):
+                page = item.funcargs[fixture]
+                katalog_zrzutu = Path("screenshots")
+                katalog_zrzutu.mkdir(exist_ok=True)
+                screen_file = str(katalog_zrzutu / f"{slugify(item.nodeid)}.png")
+                page.screenshot(path=screen_file)
+
+            if (report.skipped and xfail) or (report.failed and not xfail):
+                # dodaj zrzuty ekranu do raportu html
+                extra.append(pytest_html.extras.png(screen_file))
+            report.extra = extra
+            break
