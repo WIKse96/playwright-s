@@ -23,6 +23,7 @@ class Beds_cat:
             if strToFind in i.text_content().lower():
                 return True
             else:
+                print('----tutaj patrz----',i,'tekst:', {i.text_content()})
                 raise AssertionError(f"produkt {i} nie zawiera string '{strToFind}'na listingu.")
 
     # odpal strone kategorię z łóżkami

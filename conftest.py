@@ -19,8 +19,8 @@ def set_up(playwright: Playwright):
     main_page = "https://www.seart.pl/"
 
     #twardo okodowane informacje, zakomentować i puszczać z konsolii
-    browser = playwright.chromium.launch(headless=False)
-    contex = browser.new_context()
+    browser = playwright.chromium.launch(headless=False, args=['--start-maximized'])
+    contex = browser.new_context(no_viewport=True)
     page = contex.new_page()
     # test czy strona odpowiada
     website_is_up(main_page)
@@ -34,7 +34,7 @@ def set_up(playwright: Playwright):
 #drugie utworzenie obiektu dla zalogowanego usera.
 @pytest.fixture(scope='function')
 def login_Set_up(playwright):
-    browser = playwright.chromium.launch(headless=False, slow_mo=300)
+    browser = playwright.chromium.launch(headless=False, args=['--start-maximized'],no_viewport=True , slow_mo=300)
     context = browser.new_context()
     page_login = context.new_page()
     # Logowanie użytkownika
@@ -71,7 +71,7 @@ def pytest_runtest_makereport(item, call):
                 katalog_zrzutu = Path("screenshots")
                 katalog_zrzutu.mkdir(exist_ok=True)
                 screen_file = str(katalog_zrzutu / f"{slugify(item.nodeid)}.png")
-                page.screenshot(path=screen_file)
+                page.screenshot(path=screen_file, full_page=True)
 
             if (report.skipped and xfail) or (report.failed and not xfail):
                 # dodaj zrzuty ekranu do raportu html
